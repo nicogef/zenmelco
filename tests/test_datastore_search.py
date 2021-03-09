@@ -1,7 +1,7 @@
 import unittest
 
 from store.datastore import Datastore
-from store.datastore_load import DatastoreLoader
+from store.datastore_load import load
 from store.datastore_context import DatastoreWarning
 
 class VerifResultHelper():
@@ -22,7 +22,7 @@ class VerifResultHelper():
 class TestDatastoreSearch(unittest.TestCase):
 
     def setUp(self):
-        self.datastore = Datastore(DatastoreLoader().load("resources"))
+        self.datastore = Datastore(load("resources"))
 
     def test_datastore_search_incorrect_Entity(self):
         ''' Checks the management of an unknwon entity. '''

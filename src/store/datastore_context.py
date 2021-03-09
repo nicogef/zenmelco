@@ -1,11 +1,13 @@
 from abc import ABCMeta, abstractmethod
 
 class DatastoreWarning(Exception):
-    ''' Simple Custom exception to manage Menu level Errors. '''
+    ''' Custom exception to manage Datastore Warnings 
+            - Shall discard the search and resume the program. '''
     pass
 
 class DatastoreError(Exception):
-    ''' Simple Custom exception to manage Menu level Errors. '''
+    ''' Custom exception to manage Datastore Error 
+            - Shall stop the Program. '''
     pass
 
 class DatastoreAccess(metaclass=ABCMeta):
@@ -26,6 +28,7 @@ class DatastoreAccess(metaclass=ABCMeta):
         pass
 
 class DatastoreElement(metaclass=ABCMeta):
+    ''' Defines the way to export a stored element. '''
     def __init__(self, element):
         self.data = element
 
@@ -34,6 +37,7 @@ class DatastoreElement(metaclass=ABCMeta):
         pass
 
 class DatastoreResult():
+    ''' Holds the list of results and defines the way to print them. '''
     def __init__(self):
         self.elements = []
     

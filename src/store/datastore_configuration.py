@@ -1,16 +1,25 @@
 from store.datastore_strategies import UniqueIdentifierIndexing, MultiIdentifierIndexing, ListIndexing
 from store.datastore_strategies import as_int, as_string, as_boolean
 
+#################################################
+# Data store configuration file
+#################################################
 class FileConfiguration():
+    ''' The list of configuration required by each file to be loaded in the data store.'''
     def __init__(self, fields, out_links, in_links, description, name):
+        # The list of field in the file (supports empty values)
         self.fields = fields
+        # The definition of links to another file (unique link based on a UID)
         self.out_links = out_links
+        # The definition of links from other file (can be linked to multiple records)
         self.in_links = in_links
+        # The field of the record to be used as a short description
         self.description = description
+        # The simple name to be used for this file
         self.name = name
 
 def get_configuration(entity):
-    ''' Transforms a json description into an zenmelco Entity'''
+    ''' Returns the file configuration based on the file name. '''
     fields = []
     out_links  = {}
     in_links = {}

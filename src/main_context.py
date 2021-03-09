@@ -20,10 +20,10 @@ Type '{EXIT_TRIGGER}' to exit at any time, Press 'Enter' to continue.
 """
 
 #################################################
-# MAIN CONTEXT
+# Exit Function
 #################################################
 class ExitProgram(Exception):
-    ''' Simple Custom exception to manage Program Exit. '''
+    ''' Custom exception to manage Program Exit. '''
 
 def exit_program(item=None) -> str:
     ''' Checks if the user requested to exit the program. 
@@ -38,6 +38,9 @@ def exit_program(item=None) -> str:
         raise ExitProgram("Exit Program upon User request.")
     return item
 
+#################################################
+# MAIN CONTEXT
+#################################################
 class MainContext(object):
     ''' Exit context manager. 
             Manage a clean exit from anywhere in the program upon user request requested.
@@ -49,14 +52,16 @@ class MainContext(object):
         if exc_type: 
          if exc_type == ExitProgram:
             print("Exit program upon User request.")
-            # Supress Exception
+            # Suppress Exception
             return True
         elif exc_type == DatastoreError:
             print(f"Exit program upon initialisation Error. \n    => {exc_value}")
-            # Do not Supress Exception
+            # Do not Suppress Exception
             return False
 
-
+#################################################
+# Print Strategy (Console)
+#################################################
 class Console():
     @staticmethod
     def as_dict(d, indent=0):

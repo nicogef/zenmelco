@@ -4,20 +4,19 @@ import json
 from store.datastore_configuration import get_configuration, FileConfiguration
 from store.datastore_strategies import Element
 
-class DatastoreLoader():
-    def load(self, resourcesPath: str) -> {}:
-        ''' Loads all json files in the "resource" folder and initialise the Search strategies. '''
-        datastores = {}
-        for root, _, files in os.walk(resourcesPath):
-            json_files = [f for f in files if ".json" in f]
-            for f in json_files:
-                with open(os.path.join(root, f) ,"r") as json_file:
-                    entity_name = os.path.splitext(f)[0].title()
-                    entity = Entity(get_configuration(entity_name))
-                    for obj_json in json.load(json_file):
-                        entity.add(obj_json)
-                    datastores[entity_name] = entity
-        return datastores
+def load(resourcesPath: str) -> {}:
+    ''' Loads all json files in the "resource" folder and initialise the Search strategies. '''
+    datastores = {}
+    for root, _, files in os.walk(resourcesPath):
+        json_files = [f for f in files if ".json" in f]
+        for f in json_files:
+            with open(os.path.join(root, f) ,"r") as json_file:
+                entity_name = os.path.splitext(f)[0].title()
+                entity = Entity(get_configuration(entity_name))
+                for obj_json in json.load(json_file):
+                    entity.add(obj_json)
+                datastores[entity_name] = entity
+    return datastores
 
 class Entity():
     ''' Provides the services to read, store and access the data.

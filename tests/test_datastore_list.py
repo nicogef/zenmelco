@@ -1,13 +1,13 @@
 import unittest
 
 from store.datastore import Datastore
-from store.datastore_load import DatastoreLoader
+from store.datastore_load import load
 from store.datastore_context import DatastoreWarning
 
 class TestDatastoreList(unittest.TestCase):
 
     def setUp(self):
-        self.datastore = Datastore(DatastoreLoader().load("resources"))
+        self.datastore = Datastore(load("resources"))
 
     def test_datastore_entities(self):
         ''' Checks that all the json files have been loaded with an indexation in Title case. '''

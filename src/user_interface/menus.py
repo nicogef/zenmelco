@@ -6,6 +6,7 @@ from store.datastore_context import DatastoreAccess, DatastoreWarning
 import timeit
 
 class MainMenu(Cmd):
+    ''' Main menu manage the User actions. '''
     prompt = MAIN_MENU_PROMPT
     intro  = MAIN_MENU_INTRO
     EXIT = True    
@@ -44,13 +45,13 @@ class MainMenu(Cmd):
         return MainMenu.CONTINUE
 
 class DefaultMenu(metaclass=ABCMeta):
-    ''' Abstracts the Context management and error handling '''
+    ''' Provides a Menu for a simple prompt to retrieve a String. '''
     def __init__(self, prompt):
         self._prompt = prompt.title() + "> "
         self._intro  = self._build_intro(prompt)
 
     def prompt(self) -> bool:
-        ''' Prompt the user, check the input and return the result. '''
+        ''' Prompts the user, check the input and return the result. '''
         print(self._intro)
         rtn = exit_program(input(self._prompt))
         return self._validate(rtn)
@@ -64,7 +65,7 @@ class DefaultMenu(metaclass=ABCMeta):
         return f'Enter search {prompt.lower()} (or "quit"):'
         
 class EntityMenu(DefaultMenu):
-    ''' Holds the link between the file names and the menu indexes. '''
+    ''' Provides a Menu to choose the entity loaded in the datastore. '''
     def __init__(self, values):
         self._mapping = []
         self.values = values

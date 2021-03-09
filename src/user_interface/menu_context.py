@@ -1,11 +1,11 @@
 from store.datastore_context import DatastoreWarning
 
 class MenuContextWarning(Exception):
-    ''' Simple Custom exception to manage Menu level Errors. '''
+    ''' Custom exception to manage Warnings. '''
     pass
 
 class MenuContext(object):
-    ''' Sub Menu context manager.
+    ''' Menu context manager.
             Displays the Menu Custom exception and ignores it. 
     '''
     def __enter__(self):
@@ -15,6 +15,6 @@ class MenuContext(object):
         if exc_type and exc_type == MenuContextWarning or exc_type == DatastoreWarning:
             print(f"Warning: Cancel request due to {exc_value}")
             print("---")
-            # Supress Exception
+            # Suppress Exception
             return True
 

@@ -3,7 +3,7 @@ import json
 import datetime
 
 from store.datastore_context import DatastoreWarning, DatastoreAccess, DatastoreElement, DatastoreResult, DatastoreError
-from store.datastore_load import DatastoreLoader, Element
+from store.datastore_load import Element
 
 class Datastore(DatastoreAccess):
     def __init__(self, datastore: {}):
@@ -64,7 +64,7 @@ class Datastore(DatastoreAccess):
         return results
 
 class SearchElementResult(DatastoreElement):
-    ''' Holds a result element with associated links to related entities. '''
+    ''' Holds a result element with the associated links to related entities. '''
     def __init__(self, element: Element):
         super().__init__(element.get_data())
         self.links = {}
