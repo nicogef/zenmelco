@@ -25,6 +25,8 @@ Usage Instruction (from the root folder):
 
 # Design
 - tests
+  - integration_tests - End to end verification
+  - unit_tests - Unit test verification
 - src
   - zenmelco.py - Initialises the Datastore and starts the UI
   - main_context.py - Manages the Program context and error level Exceptions
