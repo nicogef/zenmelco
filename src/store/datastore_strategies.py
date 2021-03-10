@@ -8,7 +8,6 @@ import datetime
 DATE_DEFAULT = "1900-01-01T00:00:00-00:00"
 INT_DEFAULT = 0
 STRING_DEFAULT = ""
-LIST_DEFAULT = []
 BOOLEAN_DEFAULT = "Empty"
 
 def as_int(value):
@@ -25,17 +24,18 @@ def as_int(value):
 def as_string(value):
     return str(value) if value else STRING_DEFAULT
 
-def as_list(value):
-    return value
-
 def as_boolean(value):
     if value is None or value == "":
         return BOOLEAN_DEFAULT
-    try:
+    elif isinstance(value, bool):
         return str(value)
-    except ValueError:
-        raise DatastoreError(f"'{value}' is invalid as a BOOLEAN identifier")
-    
+    elif isinstance(value, str):
+        if (value.lower() == "true"or value.lower() == "false"):
+            return value.title()
+        elif value == BOOLEAN_DEFAULT:
+            return value
+    raise DatastoreError(f"'{value}' is invalid as a 'BOOLEAN' identifier")
+        
 class Element():
     ''' Stores an Element of the datastore. '''
     def __init__(self, data, description):
@@ -93,8 +93,11 @@ class MultiIdentifierIndexing(IndexingStrategy):
 
 class ListIndexing(MultiIdentifierIndexing):
     def __init__(self, key):
-        super().__init__(key, as_list)
+        super().__init__(key, as_string)
 
-    def _add(self, value, element):
+    def add(self, element):
+        value = element.get_data()[self._key]
+        if not isinstance(value, list):
+            raise DatastoreError(f"'{value}' is invalid as a 'List' identifier")
         for v in value:
-            super(ListIndexing, self)._add(v, element)
+            self._add(self._to_index(v), element)
