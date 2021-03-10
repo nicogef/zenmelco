@@ -6,7 +6,15 @@ Command line application to search data in json files and return the results in 
 # 
 Language: [Python 3.7.9](https://www.python.org/downloads/release/python-379/)
 
+Prerequisite:
+ - Python is installed and added to the path
+
 Usage Instruction (from the root folder):
+- Run program:
+  > git clone https://github.com/nicogef/zenmelco.git
+  > cd zenmelco
+  > python .\src\zenmelco.py
+
 - Tests
   - unit tests
     > python -m unittest discover -s tests/unit_tests -v
@@ -14,8 +22,6 @@ Usage Instruction (from the root folder):
     > python -m unittest discover -s tests/integration_tests -v
   - All tests
     > python -m unittest discover -s tests -v
-- Run program
- > python .\src\zenmelco.py
 
 # Assumptions
 1. All input files data are correctly formatted (No checks upon loading).
@@ -24,9 +30,6 @@ Usage Instruction (from the root folder):
 4. All dates are in iso format
 
 # Design
-- tests
-  - integration_tests - End to end verification
-  - unit_tests - Unit test verification
 - src
   - zenmelco.py - Initialises the Datastore and starts the UI
   - main_context.py - Manages the Program context and error level Exceptions
@@ -39,3 +42,6 @@ Usage Instruction (from the root folder):
     - datastore_load.py - Loads the json files and initialise the entities
     - datastore_strategies - Defines indexing strategies
     - datastore_configuration - Maps the json files data to an indexing strategy (typed), defines keys for the links and other parameters
+- tests
+  - integration_tests - End to end verification
+  - unit_tests - Unit tests
