@@ -12,7 +12,9 @@ Prerequisite:
 Usage Instruction (from the root folder):
 - Run program:
   > git clone https://github.com/nicogef/zenmelco.git
+  
   > cd zenmelco
+
   > python .\src\zenmelco.py
 
 - Tests
