@@ -37,19 +37,9 @@ class Datastore(DatastoreAccess):
             searches = value.split(" and ")
             for search in searches:
                 result = entity.get_from_key(item, search)
-                if search_result == []:
-                    search_result = result
-                else:
-                    new_result = []
-                    for element1 in result:
-                        for element2 in search_result:
-                            if element2 is element1:
-                                new_result.append(element1)
-                    search_result = new_result
+                search_result = result if search_result == [] else list(set(search_result) & set(result))
         else:
             search_result.extend(entity.get_from_key(item, value))
-
-
 
         return self._format_and_add_links(entity, search_result)
 
