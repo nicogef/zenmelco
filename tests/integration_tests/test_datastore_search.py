@@ -115,13 +115,20 @@ class TestDatastoreSearch(unittest.TestCase):
         # Boolean
         self.assertEqual(len(self.datastore.search("Tickets", "has_incidents", "").elements), 0)
         self.assertEqual(len(self.datastore.search("Tickets", "has_incidents", "False").elements), 101)
-        self.assertEqual(len(self.datastore.search("Tickets", "has_incidents", False).elements), 101)
         # Empty List
         self.assertEqual(len(self.datastore.search("Tickets", "tags", "").elements), 0)
         self.assertEqual(len(self.datastore.search("Tickets", "tags", "Ohio").elements), 14)
         # Empty Date
         self.assertEqual(len(self.datastore.search("Tickets", "created_at", "").elements), 0)
         self.assertEqual(len(self.datastore.search("Tickets", "created_at", "2016-06-26T12:12:53 -10:00").elements), 1)
+
+    def test_datstore_search_or(self):
+        self.assertEqual(len(self.datastore.search("Users", "_id", "1 or 8 or 9").elements), 3)
+
+    def test_datstore_search_and(self):
+        self.assertEqual(len(self.datastore.search("Users", "tags", "Springville and Sutton").elements), 2)
+        self.assertEqual(len(self.datastore.search("Users", "tags", "Springville and Greenbush").elements), 1)
+
 
     def assert_datastore_search(self, entity: str, item:str, value: str, checkers: VerifResultHelper):
         from store.datastore_context import DatastoreResult
