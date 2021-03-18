@@ -18,11 +18,6 @@ Usage Instruction (from the root folder):
   > python .\src\zenmelco.py
 
 - Tests
-  - unit tests
-    > python -m unittest discover -s tests/unit_tests -v
-  - integration tests
-    > python -m unittest discover -s tests/integration_tests -v
-  - All tests
     > python -m unittest discover -s tests -v
 
 # Assumptions
